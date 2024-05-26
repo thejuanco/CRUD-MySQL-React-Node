@@ -1,8 +1,7 @@
 import express from 'express';
+import { PORT } from './config.js';
 
 const app = express();
 
-const port = 3000;
-
-app.listen(port);
-console.log(`El servidor esta funcionando en el puerto: ${port}`)
+app.listen(PORT);
+console.log(`El servidor esta funcionando en el puerto: ${PORT}`)
