@@ -1,3 +1,5 @@
+import { pool } from "../db.js"
+
 const getTasks = (req, res) => {
     res.send("Obteniendo tareas")
 }
@@ -6,6 +8,8 @@ const getTask = (req, res) => {
     res.send("Obteniendo una tarea")
 }
 const createTask = (req, res) => {
+    const { title, description } = req.body
+    pool.query('')
     res.send("Creando tarea")
 }
 const updateTask = (req, res) => {
