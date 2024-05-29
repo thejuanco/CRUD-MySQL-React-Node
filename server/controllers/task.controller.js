@@ -41,9 +41,18 @@ const createTask = async (req, res) => {
     })
 }
 
-const updateTask = (req, res) => {
-    res.send("Actualizando tarea")
+const updateTask = async (req, res) => {
+
+   //Extraer los datos del body y consulta
+   const result = await pool.query("UPDATE tasks SET ? WHERE id = ?", [
+     req.body,
+     req.params.id,
+   ]);
+
+   res.json(result);
+
 }
+
 const deleteTask = async (req, res) => {
     //Consulta
     const [ result ] = await pool.query('DELETE FROM tasks WHERE id = ?', [req.params.id])
