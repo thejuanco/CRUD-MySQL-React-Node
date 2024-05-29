@@ -14,7 +14,7 @@ const getTask = async (req, res) => {
     ]);
 
     //Si no existe el resultado
-    result.length == 0 ? res.status(404).json({ message: "Tarea no encontrada"}) : null
+    result.length === 0 ? res.status(404).json({ message: "Tarea no encontrada"}) : null
 
     //Mostrando el resultado
     res.json(result[0]);
@@ -44,8 +44,15 @@ const createTask = async (req, res) => {
 const updateTask = (req, res) => {
     res.send("Actualizando tarea")
 }
-const deleteTask = (req, res) => {
-    res.send("Eliminando tarea")
+const deleteTask = async (req, res) => {
+    //Consulta
+    const [ result ] = await pool.query('DELETE FROM tasks WHERE id = ?', [req.params.id])
+
+    //Validacion si no existe el resultado
+    result.affectedRows === 0 ?  res.status(404).json({ message: "Tarea no encontrada"}) : null
+
+    //Retornando el status
+    return res.sendStatus(204)
 }
 
 export {
