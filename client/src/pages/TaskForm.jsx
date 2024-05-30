@@ -11,17 +11,18 @@ const TaskForm = () => {
           title: "",
           description: "",
         }}
-        onSubmit={async (values) => {
+        onSubmit={async (values, actions) => {
           console.log(values);
           try {
             const response = await createTaskRequest(values);
             console.log(response);
+            actions.resetForm();
           } catch (error) {
             console.log(error);
           }
         }}
       >
-        {({ handleChange, handleSubmit }) => (
+        {({ handleChange, handleSubmit, values, isSubmitting }) => (
           //Utilizando la propiedad handleChange para ver que tipea el usario en el formulario
           <Form onSubmit={handleSubmit}>
             <label>Title</label>
@@ -31,6 +32,7 @@ const TaskForm = () => {
               placeholder="Write a title"
               //Llenando el evento onChange con los datos que introduce el usuario
               onChange={handleChange}
+              value={values.title}
             />
 
             <label>Description</label>
@@ -39,9 +41,12 @@ const TaskForm = () => {
               rows="3"
               placeholder="Write a description"
               onChange={handleChange}
+              value={values.description}
             ></textarea>
 
-            <button type="submit">Save</button>
+            <button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Loading..." : "Create Task"}
+            </button>
           </Form>
         )}
       </Formik>
