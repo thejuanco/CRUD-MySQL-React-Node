@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom"
-import { TaskContextProvider } from './context/TaskContext' 
+import { TaskContextProvider } from './context/TaskProvider' 
 
 //Importando las vistas
 import NavBar from "./components/NavBar"

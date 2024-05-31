@@ -1,7 +1,11 @@
 import { Formik, Form } from "formik";
-import { useTask } from "../context/TaskContext";
+import { useTask } from "../context/TaskProvider";
 
 const TaskForm = () => {
+
+  //Extraer los datos desde el context
+  const { createTask } = useTask();
+
   return (
     <div>
       <Formik
@@ -12,13 +16,8 @@ const TaskForm = () => {
         }}
         onSubmit={async (values, actions) => {
           console.log(values);
-          try {
-            const response = await createTaskRequest(values);
-            console.log(response);
-            actions.resetForm();
-          } catch (error) {
-            console.log(error);
-          }
+          createTask(values)
+          actions.resetForm();
         }}
       >
         {({ handleChange, handleSubmit, values, isSubmitting }) => (
