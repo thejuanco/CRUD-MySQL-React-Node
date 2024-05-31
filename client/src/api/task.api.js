@@ -9,11 +9,14 @@ const getTaskRequest = async () => {
     console.error(error);
     throw error; // Opcional: relanza el error para manejarlo en otro lugar si es necesario
   }
-}
-
+};
 
 const createTaskRequest = async (task) => {
   return await axios.post("http://localhost:4000/tasks", task);
 };
 
-export { createTaskRequest, getTaskRequest };
+const deleteTaskRequest = async (id) => {
+  return await axios.delete(`http://localhost:4000/tasks/${id}`);
+};
+
+export { createTaskRequest, getTaskRequest, deleteTaskRequest };
