@@ -19,9 +19,11 @@ function TasksPage() {
     <div>
       <h1>Tareas</h1>
 
-      {tasks.map((task) => (
-        <TaskCard task={task} key={task.id} />
-      ))}
+      {tasks.length == 0 ? (
+        <h1>No hay tareas por hacer</h1>
+      ) : (
+        tasks.map((task) => <TaskCard task={task} key={task.id} />)
+      )}
     </div>
   );
 }
