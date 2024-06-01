@@ -23,4 +23,8 @@ const getTaskRequest = async (id) => {
     return await axios.get(`http://localhost:4000/tasks/${id}`); // Retorna los datos obtenidos de la solicitud
 };
 
-export { createTaskRequest, getTasksRequest, deleteTaskRequest, getTaskRequest };
+const updateTaskRequest = async (id, newFields) => {
+    return await axios.put(`http://localhost:4000/tasks/${id}`, newFields); // Retorna los datos obtenidos de la solicitud
+};
+
+export { createTaskRequest, getTasksRequest, deleteTaskRequest, getTaskRequest, updateTaskRequest };

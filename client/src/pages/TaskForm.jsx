@@ -1,23 +1,57 @@
+import { useEffect, useState } from "react";
 import { Formik, Form } from "formik";
 import { useTask } from "../context/TaskProvider";
+import { useParams, useNavigate } from "react-router-dom";
 
 const TaskForm = () => {
-
   //Extraer los datos desde el context
-  const { createTask } = useTask();
+  const { createTask, getTask, updateTask } = useTask();
+  const params = useParams()
+  const navigate = useNavigate()
+
+  //Creando una useState para cargar la tarea al momento de actualizar
+  const [task, setTask] = useState({
+    title: "",
+    description: "",
+  });
+
+  useEffect(() => {
+    const loadTasks = async () => {
+      if (params.id) {
+        const task = await getTask(params.id);
+        setTask({
+          title: task.title,
+          description: task.description,
+        });
+      }
+    };
+    loadTasks();
+  }, []);
 
   return (
     <div>
+
+      <h1>{params.id ? "Editar Tarea": "Crear una Tarea"}</h1>
+
       <Formik
         //En lugar de crear un componente personalizado utlizamos formik para el formulario
-        initialValues={{
-          title: "",
-          description: "",
-        }}
+        initialValues={task}
+        //Reiniciar los valores de formik
+        enableReinitialize={true}
         onSubmit={async (values, actions) => {
           console.log(values);
-          createTask(values)
-          actions.resetForm();
+          
+          if (params.id) {
+            await updateTask(params.id, values)
+            navigate("/");
+          } else {
+            await createTask(values)
+          }
+          //actions.resetForm();
+          setTask({
+            title: "",
+            description: "",
+          });
         }}
       >
         {({ handleChange, handleSubmit, values, isSubmitting }) => (
@@ -43,7 +77,7 @@ const TaskForm = () => {
             ></textarea>
 
             <button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Loading..." : "Create Task"}
+              {isSubmitting ? "Guardar Cambios" : "Crear Tarea"}
             </button>
           </Form>
         )}
