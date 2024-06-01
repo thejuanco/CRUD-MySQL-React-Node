@@ -11,12 +11,12 @@ const NavBar = () => {
       <ul className="flex">
         <li>
           <Link to="/" className="p-2 mx-2 hover:underline">
-            Home
+            Inicio
           </Link>
         </li>
         <li>
           <Link to="/new" className="p-2  rounded-lg hover:underline">
-            Create Task
+            Crear Tarea
           </Link>
         </li>
       </ul>
