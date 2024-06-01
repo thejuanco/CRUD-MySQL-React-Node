@@ -6,7 +6,11 @@ const TaskCard = ({task}) => {
 
     const navigate = useNavigate()
 
-    const {deleteTask} = useTask();
+    const {deleteTask, toogleTaskDone} = useTask();
+
+    const handleDone = async () => {
+      await toogleTaskDone(task.id)
+    }
 
   return (
     <div>
@@ -16,7 +20,8 @@ const TaskCard = ({task}) => {
       <span>{task.createdAt}</span>
       <button onClick={() => deleteTask(task.id)}>Eliminar</button>
       <button onClick={() => navigate(`/edit/${task.id}`)}>Editar</button>
-    </div>
+      <button onClick={() => handleDone(task.id)}>Tarea Completada</button>
+    </div> 
   );
 };
 
