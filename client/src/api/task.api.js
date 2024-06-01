@@ -1,7 +1,7 @@
 //Este archivo nos permite comunicar los modulos
 import axios from "axios";
 
-const getTaskRequest = async () => {
+const getTasksRequest = async () => {
   try {
     const response = await axios.get("http://localhost:4000/tasks");
     return response.data; // Retorna los datos obtenidos de la solicitud
@@ -19,4 +19,8 @@ const deleteTaskRequest = async (id) => {
   return await axios.delete(`http://localhost:4000/tasks/${id}`);
 };
 
-export { createTaskRequest, getTaskRequest, deleteTaskRequest };
+const getTaskRequest = async (id) => {
+    return await axios.get(`http://localhost:4000/tasks/${id}`); // Retorna los datos obtenidos de la solicitud
+};
+
+export { createTaskRequest, getTasksRequest, deleteTaskRequest, getTaskRequest };
