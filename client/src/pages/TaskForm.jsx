@@ -44,10 +44,10 @@ const TaskForm = () => {
 
             if (params.id) {
               await updateTask(params.id, values);
-              navigate("/");
             } else {
               await createTask(values);
             }
+            navigate("/");
             //actions.resetForm();
             setTask({
               title: "",

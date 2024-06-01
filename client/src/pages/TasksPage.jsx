@@ -12,8 +12,7 @@ function TasksPage() {
   }, []);
 
   return (
-    <div>
-      <h1>Tareas</h1>
+    <div className="grid grid-cols-3 mx-10">
 
       {tasks.length == 0 ? (
         <h1>No hay tareas por hacer</h1>
