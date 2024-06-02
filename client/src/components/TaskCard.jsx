@@ -1,6 +1,7 @@
 import React from "react";
 import { useTask } from "../context/TaskProvider";
 import { useNavigate } from "react-router-dom";
+import { formatearFecha } from "../helpers/index.js";
 
 const TaskCard = ({task}) => {
 
@@ -13,14 +14,14 @@ const TaskCard = ({task}) => {
     }
 
   return (
-    <div className="mx-2 ">
+    <div className="m-2">
       <div className="border rounded-lg px-6 h-64">
         <h2 className="font-bold text-2xl text-left mt-6">{task.title}</h2>
         <p className="text-gray-500 mb-8">{task.description}</p>
-        <div className="flex justify-beetwen">
-          <span className="">Creada: {task.createdAt}</span>
+        <div className="flex justify-between">
+          <span className="">Creada: {formatearFecha(task.createdAt)}</span>
           <span className="">
-            {task.done == 1 ? <span className="px-2 bg-amber-200 rounded-2xl text-amber-700">Pendiente</span> : <span className="px-2 bg-green-200 rounded-2xl text-green-700">Completada</span>}
+            {task.done == 1 ? <span className="px-2 bg-green-200 rounded-2xl text-green-700">Completada</span> : <span className="px-2 bg-amber-200 rounded-2xl text-amber-700">Pendiente</span>}
           </span>
         </div>
         <div className="space-x-2 mt-10">
@@ -40,7 +41,7 @@ const TaskCard = ({task}) => {
             onClick={() => handleDone(task.id)}
             className="hover:underline"
           >
-            {task.done == 1 ? "Tarea completada" : "Tarea No Completa" }
+            {task.done == 1 ? "Tarea no completa" : "Tarea Completada" }
           </button>
         </div>
       </div>
